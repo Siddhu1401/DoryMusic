@@ -11,6 +11,7 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import time
 import logging
+from keep_alive import keep_alive
 
 # Load environment variables
 load_dotenv()
@@ -270,6 +271,9 @@ async def play_next_song(voice_client, guild_id, channel):
         if voice_client.is_connected() and not voice_client.is_playing():
             await voice_client.disconnect()
             SONG_QUEUES.pop(guild_id, None)
+
+# Call the keep_alive function to start the web server
+keep_alive() 
 
 # --- Bot Runner with Crash Handler ---
 while True:
