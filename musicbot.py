@@ -14,7 +14,8 @@ import logging
 
 # Load environment variables
 load_dotenv()
-TOKEN = os.getenv("DISCORD_BOT_TOKEN")
+TOKEN = os.getenv('DISCORD_BOT_TOKEN')
+print(f"Attempting to log in with token: '{TOKEN}'")
 SPOTIPY_CLIENT_ID = os.getenv("SPOTIPY_CLIENT_ID")
 SPOTIPY_CLIENT_SECRET = os.getenv("SPOTIPY_CLIENT_SECRET")
 
