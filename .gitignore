@@ -1,0 +1,15 @@
+# Python virtual environment
+/venv/
+
+# Environment variables file
+.env
+
+# Cache folder
+.cache/
+
+# Log files
+*.log
+
+# Data and session files
+bot_data.json
+cookies.txt

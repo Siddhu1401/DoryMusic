@@ -1,0 +1,9 @@
+py-cord
+PyNaCl
+pynacl
+pygame
+python-dotenv
+yt-dlp
+discord.py
+spotify
+spotipy
