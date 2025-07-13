@@ -11,7 +11,7 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import time
 import logging
-
+from keep_alive import keep_alive
 # --- Environment and Logging Setup ---
 load_dotenv()
 TOKEN = os.getenv("DISCORD_BOT_TOKEN")
@@ -151,8 +151,8 @@ class MusicControls(discord.ui.View):
     async def volume(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.send_modal(VolumeModal())
 
-# --- Bot Setup ---
 intents = discord.Intents.default()
+intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 @bot.event
@@ -253,6 +253,8 @@ async def play_next_song(voice_client, guild_id, channel):
             await voice_client.disconnect()
             NOW_PLAYING_MESSAGES.pop(guild_id, None)
 
+# Call the keep_alive function to start the web server
+keep_alive() 
 # --- Bot Runner ---
 while True:
     try:
