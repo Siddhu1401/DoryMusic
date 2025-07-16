@@ -272,6 +272,15 @@ async def play_next_song(voice_client, guild_id, channel):
             await voice_client.disconnect()
             SONG_QUEUES.pop(guild_id, None)
 
+
+@bot.tree.command(name="ping", description="Check the bot's latency")
+async def ping(interaction: discord.Interaction):
+    latency = round(bot.latency * 1000)
+    await interaction.response.send_message(embed=discord.Embed(title="🏓 Pong!", description=f"Latency: {latency}ms", color=discord.Color.green())
+                                            , ephemeral=True)
+    
+
+
 # Call the keep_alive function to start the web server
 keep_alive() 
 
