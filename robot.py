@@ -201,7 +201,7 @@ async def play_command(interaction: discord.Interaction, song_query: str):
     added_to_queue = []
     for query in song_queries:
         try:
-            ydl_opts = {"format": "bestaudio", "noplaylist": True, "quiet": True, "extract_flat": True}
+            ydl_opts = {"format": "bestaudio", "noplaylist": True, "quiet": True, "extract_flat": True, "cookiefile": "cookies.txt"}
             results = await search_ytdlp_async(f"ytsearch1:{query}", ydl_opts)
             if not results or not results.get('entries'): continue
             video_info = results['entries'][0]
