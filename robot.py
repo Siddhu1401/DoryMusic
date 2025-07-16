@@ -253,6 +253,22 @@ async def play_next_song(voice_client, guild_id, channel):
             await voice_client.disconnect()
             NOW_PLAYING_MESSAGES.pop(guild_id, None)
 
+
+@bot.tree.command(name="ping", description="Check the bot's latency.")
+async def ping_command(interaction: discord.Interaction):
+    # Calculate the latency in milliseconds
+    latency = round(bot.latency * 1000)
+    
+    # Create an embed to send as the reply
+    embed = discord.Embed(
+        title="🏓 Pong!",
+        description=f"My latency is **{latency}ms**.",
+        color=discord.Color.blue() # You can change this color
+    )
+    
+    # Send the embed as a response
+    await interaction.response.send_message(embed=embed)            
+
 # Call the keep_alive function to start the web server
 keep_alive() 
 # --- Bot Runner ---
