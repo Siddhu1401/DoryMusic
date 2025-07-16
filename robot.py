@@ -11,7 +11,7 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import time
 import logging
-from keep_alive import keep_alive
+
 # --- Environment and Logging Setup ---
 load_dotenv()
 TOKEN = os.getenv("DISCORD_BOT_TOKEN")
@@ -232,7 +232,7 @@ async def play_next_song(voice_client, guild_id, channel):
         song_data = SONG_QUEUES[guild_id].popleft()
         title, webpage_url = song_data['title'], song_data['webpage_url']
         try:
-            stream_opts = {"format": "bestaudio", "quiet": True}
+            stream_opts = {"format": "bestaudio", "quiet": True, "cookiefile": "cookies.txt"}
             stream_results = await search_ytdlp_async(webpage_url, stream_opts)
             audio_url = stream_results['url']
             ffmpeg_options = {"before_options": "-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5", "options": "-vn"}
@@ -269,8 +269,7 @@ async def ping_command(interaction: discord.Interaction):
     # Send the embed as a response
     await interaction.response.send_message(embed=embed)            
 
-# Call the keep_alive function to start the web server
-keep_alive() 
+
 # --- Bot Runner ---
 while True:
     try:
